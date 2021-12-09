@@ -89,7 +89,7 @@ public class Enemy : SpawnableObject {
         }
 
         if (collision.gameObject.CompareTag("JumpTrigger")) {
-            if ((transform.position.y - 0.05f) < player.CurrentPosition.y){
+            if ((transform.position.y - 0.05f) < player.CurrentPosition.y && Random.Range(0, 100) >= 20){
                 jumping = true;
             }
         }
