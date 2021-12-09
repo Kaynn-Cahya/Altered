@@ -1,5 +1,5 @@
 # Altering
-Altering is a game made for [Thankjam - Thankmas Charity Jam](https://itch.io/jam/thankjam).\n
+Altering is a game made for [Thankjam - Thankmas Charity Jam](https://itch.io/jam/thankjam).<br/>
 A platformer game about befriending and betraying cubes.
 
 ### How to:
