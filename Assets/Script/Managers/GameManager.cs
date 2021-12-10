@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void TriggerGameOver() {
+        NewgroundsManager.Instance.AddScoreToLeaderboard(Score);
 
         bool newHighscore = false;
         int highestScore = SaveManager.Instance.LoadHighscore();
@@ -60,6 +61,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void AddScore(int amount) {
+        TriggerScoreAchievement(Score, amount);
         Score += amount;
         gameScoreText.text = Score.ToString();
         LeanTween.scale(gameScoreText.gameObject, gameScoreSize + new Vector3(0.7f, 0.7f, 0.7f), 0.15f).setEasePunch().setOnComplete(ScaleBack);
@@ -77,6 +79,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void TriggerClearScreen() {
         AddScore(10);
+        NewgroundsManager.Instance.UnlockMedal(NewgroundsManager.MEDAL_TAG.CLEAR_SCREEN);
         StartCoroutine(ClearScreenCoroutine());
 
         IEnumerator ClearScreenCoroutine() {
@@ -85,6 +88,26 @@ public class GameManager : Singleton<GameManager> {
             yield return new WaitForSeconds(1.5f);
 
             LeanTween.scale(clearScreenText.gameObject, Vector3.zero, 0.1f).setEaseLinear();
+        }
+    }
+
+    private void TriggerScoreAchievement(int originalScore, int addition) {
+        int newScore = originalScore + addition;
+
+        NewgroundsManager.MEDAL_TAG? medalTag = null;
+
+        if (originalScore < 25 && newScore >= 25) {
+            medalTag = NewgroundsManager.MEDAL_TAG.P_25;
+        } else if (originalScore < 50 && newScore >= 50) {
+            medalTag = NewgroundsManager.MEDAL_TAG.P_50;
+        } else if (originalScore < 100 && newScore >= 100) {
+            medalTag = NewgroundsManager.MEDAL_TAG.P_100;
+        } else if (originalScore < 200 && newScore >= 200) {
+            medalTag = NewgroundsManager.MEDAL_TAG.P_200;
+        }
+
+        if (medalTag != null) {
+            NewgroundsManager.Instance.UnlockMedal((NewgroundsManager.MEDAL_TAG) medalTag);
         }
     }
 

@@ -102,6 +102,7 @@ public class Player : Singleton<Player> {
     }
 
     private void Die() {
+        NewgroundsManager.Instance.UnlockMedal(NewgroundsManager.MEDAL_TAG.DIE);
         GameManager.Instance.TriggerGameOver();
         SpawnDeathParticle();
         Destroy(gameObject);
