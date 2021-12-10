@@ -15,10 +15,9 @@ public class Spawner : MonoBehaviour {
     private Timer timer;
 
     private void Start() {
-
         float threshold;
         int startingSpawnOrNot = Random.Range(0, 100);
-        if (startingSpawnOrNot > 49) {
+        if (startingSpawnOrNot > 35) {
             threshold = 3f;
         } else {
             threshold = Random.Range(minSpawnTime, maxSpawnTime);
@@ -55,6 +54,8 @@ public class Spawner : MonoBehaviour {
     }
 
     public void ReduceMaxThreshold(float reduction) {
-        maxSpawnTime -= reduction;
+        if ((maxSpawnTime - reduction - 5f) >= minSpawnTime) {
+            maxSpawnTime -= reduction;
+        }
     }
 }

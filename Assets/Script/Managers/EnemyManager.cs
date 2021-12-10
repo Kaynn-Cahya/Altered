@@ -26,7 +26,7 @@ public class EnemyManager : Singleton<EnemyManager> {
 
             foreach (var spawner in enemySpawners) {
                 spawner.AddTimerTicks(Random.Range(1f, 5f));
-                spawner.ReduceMaxThreshold(0.1f);
+                spawner.ReduceMaxThreshold(0.25f);
             }
         }
     }
