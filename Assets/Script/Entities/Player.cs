@@ -119,7 +119,7 @@ public class Player : Singleton<Player> {
             SetHatColour();
             Destroy(collision.gameObject);
             EnemyManager.Instance.TriggerPlayerColourChanged();
-            AudioManager.Instance.PlayCollectAudio();
+            AudioManager.Instance.PlayAudio(AudioType.COLLECT);
         }
     }
 
@@ -135,7 +135,7 @@ public class Player : Singleton<Player> {
 
         if (collision.gameObject.CompareTag("Enemy")) {
             if (collision.gameObject.GetComponent<Enemy>().Color != CurrentColour) {
-                AudioManager.Instance.PlayDeathAudio();
+                AudioManager.Instance.PlayAudio(AudioType.DEATH);
                 Die();
             }
         }
@@ -149,6 +149,8 @@ public class Player : Singleton<Player> {
             jumping = false;
             SetPlayerAlpha(0.6f);
             playerRigidbody.gravityScale = 0f;
+
+            AudioManager.Instance.PlayAudio(AudioType.DASH);
         } else {
             SetPlayerAlpha(1f);
             playerRigidbody.gravityScale = gravityScale;

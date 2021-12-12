@@ -98,7 +98,7 @@ public class Enemy : SpawnableObject {
 
         if (collision.gameObject.CompareTag("Player")) {
             if (playerColour == Color) {
-                AudioManager.Instance.PlayDeathAudio();
+                AudioManager.Instance.PlayAudio(AudioType.DEATH);
                 Die();
             }
         } else if (collision.gameObject.CompareTag("Enemy")) {
@@ -108,7 +108,7 @@ public class Enemy : SpawnableObject {
             var otherEnemy = collision.gameObject.GetComponent<Enemy>();
             // Other enemy is same as player, but this is different from player.
             if (otherEnemy.Color == playerColour) {
-                AudioManager.Instance.PlayDeathAudio();
+                AudioManager.Instance.PlayAudio(AudioType.DEATH);
                 otherEnemy.Die();
                 Die();
             }
