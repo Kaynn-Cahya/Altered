@@ -8,7 +8,7 @@ public class GeneralEventsListeners : MonoBehaviour {
 	Vector3 towardsRotation;
 	float turnForLength = 0.5f;
 	float turnForIter = 0f;
-	Color fromColor;
+    UnityEngine.Color fromColor;
 
 	// It's best to make this a public enum that you use throughout your project, so every class can have access to it
 	public enum MyEvents{ 
@@ -39,10 +39,10 @@ public class GeneralEventsListeners : MonoBehaviour {
 	void changeColor( LTEvent e ){
 		Transform tran = (Transform)e.data;
 		float distance = Vector3.Distance( tran.position, transform.position);
-		Color to = new Color(Random.Range(0f,1f),0f,Random.Range(0f,1f));
-		LeanTween.value( gameObject, fromColor, to, 0.8f ).setLoopPingPong(1).setDelay(distance*0.05f).setOnUpdate(
-			(Color col)=>{
-				GetComponent<Renderer>().material.color = col;
+        UnityEngine.Color to = new UnityEngine.Color(Random.Range(0f,1f),0f, Random.Range(0f,1f));
+        LeanTween.value(gameObject, fromColor, to, 0.8f ).setLoopPingPong(1).setDelay(distance * 0.05f).setOnUpdate(
+			(UnityEngine.Color col)=>{
+                GetComponent<Renderer>().material.color = col;
 			}
 		);
 	}

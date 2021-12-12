@@ -29,7 +29,7 @@ public class PathSpline2d : MonoBehaviour {
 	}
 
 	void OnDrawGizmos(){
-		Gizmos.color = Color.red;
+        Gizmos.color = UnityEngine.Color.red;
 		if(visualizePath!=null)
 			visualizePath.gizmoDraw();
 	}

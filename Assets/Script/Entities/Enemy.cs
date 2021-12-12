@@ -17,7 +17,7 @@ public class Enemy : SpawnableObject {
         get; private set;
     }
 
-    public Colour Colour {
+    public ColorEnum Color {
         get; private set;
     }
 
@@ -45,7 +45,7 @@ public class Enemy : SpawnableObject {
         jumping = false;
 
         this.player = Player.Instance;
-        this.Colour = GenerateColour();
+        this.Color = GenerateColour();
         SetColor();
         ToggleFollow();
         size = transform.localScale;
@@ -54,27 +54,25 @@ public class Enemy : SpawnableObject {
 
         #region Local_Function
 
-        Colour GenerateColour() {
-            Colour colour;
+        ColorEnum GenerateColour() {
+            ColorEnum color;
             do {
-                colour = Colour.RandColour();
-            } while (colour.ColourMatch(player.CurrentColour));
-            return colour;
+                color = Utils.RandColorEnum();
+            } while (color == player.CurrentColour);
+            return color;
         }
 
         #endregion
     }
 
     private void SetColor() {
-        if (ColorUtility.TryParseHtmlString(Colour.GetHexColor(), out Color color)) {
-            spriteRenderer.color = color;
-        } else {
-            Debug.LogError("Enemy.cs :: 'SetColour()' color is invalid");
-        }
+
+        spriteRenderer.color = Color.GetColor();
+
     }
 
     public void ToggleFollow() {
-        if (player.CurrentColour.ColourMatch(Colour)) {
+        if (player.CurrentColour == Color) {
             FollowPlayer = false;
             xMovement = 0;
             jumping = false;
@@ -89,7 +87,7 @@ public class Enemy : SpawnableObject {
         }
 
         if (collision.gameObject.CompareTag("JumpTrigger")) {
-            if ((transform.position.y - 0.05f) < player.CurrentPosition.y && Random.Range(0, 100) >= 20){
+            if ((transform.position.y - 0.05f) < player.CurrentPosition.y && Random.Range(0, 100) >= 20) {
                 jumping = true;
             }
         }
@@ -99,17 +97,17 @@ public class Enemy : SpawnableObject {
         var playerColour = player.CurrentColour;
 
         if (collision.gameObject.CompareTag("Player")) {
-            if (playerColour.ColourMatch(Colour)) {
+            if (playerColour == Color) {
                 AudioManager.Instance.PlayDeathAudio();
                 Die();
             }
         } else if (collision.gameObject.CompareTag("Enemy")) {
-            if (playerColour.ColourMatch(Colour)) {
+            if (playerColour == Color) {
                 return;
             }
             var otherEnemy = collision.gameObject.GetComponent<Enemy>();
             // Other enemy is same as player, but this is different from player.
-            if (otherEnemy.Colour.ColourMatch(playerColour)) {
+            if (otherEnemy.Color == playerColour) {
                 AudioManager.Instance.PlayDeathAudio();
                 otherEnemy.Die();
                 Die();
@@ -142,11 +140,8 @@ public class Enemy : SpawnableObject {
         GameObject particle = Instantiate(deathParticle);
         particle.transform.position = transform.position;
 
-        if (ColorUtility.TryParseHtmlString(Colour.GetHexColor(), out Color color)) {
-            color.a = 0.6f;
-            particle.GetComponent<ParticleSystem>().startColor = color;
-        } else {
-            Debug.LogError("Player.cs :: 'SpawnDeathParticle()' color is invalid");
-        }
+        var color = Color.GetColor();
+        color.a = 0.6f;
+        particle.GetComponent<ParticleSystem>().startColor = color;
     }
 }

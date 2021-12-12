@@ -17,7 +17,7 @@ public class Collectable : SpawnableObject {
 
     SpriteRenderer spriteRenderer;
 
-    public Colour Colour {
+    public ColorEnum Color {
         get; private set;
     }
 
@@ -48,38 +48,35 @@ public class Collectable : SpawnableObject {
     public override void Initalize(object[] args) {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (TryGetColourFromArgs(out Colour argColour)) {
-            Colour = argColour;
+        if (TryGetColourFromArgs(out ColorEnum argColour)) {
+            Color = argColour;
         } else {
-            Colour = new Colour(ColourEnum.BLUE);
-            Debug.LogError("Collectable.cs :: Initalize() :: Colour is not passed in as Arg.");
+            Color = ColorEnum.BLUE;
+            Debug.LogError("Collectable.cs :: Initalize() :: Color is not passed in as Arg.");
         }
         SetColor();
 
         #region Local_Function
 
-        bool TryGetColourFromArgs(out Colour colour) {
-            colour = null;
+        bool TryGetColourFromArgs(out ColorEnum colorEnum) {
+            colorEnum = ColorEnum.ORANGE;
 
             foreach (var arg in args) {
-                if (arg as Colour != null) {
-                    colour = arg as Colour;
+                if (typeof(ColorEnum).IsAssignableFrom(arg.GetType())) {
+                    colorEnum = (ColorEnum)arg;
                     return true;
                 }
             }
 
-            return colour != null;
+            return colorEnum != ColorEnum.ORANGE;
         }
 
         #endregion
     }
 
     private void SetColor() {
-        if (ColorUtility.TryParseHtmlString(Colour.GetHexColor(), out Color color)) {
-            spriteRenderer.color = color;
-            particleEmitter.startColor = color;
-        } else {
-            Debug.LogError("Collectable.cs :: 'SetColour()' color is invalid");
-        }
+        var color = Color.GetColor();
+        spriteRenderer.color = color;
+        particleEmitter.startColor = color;
     }
 }

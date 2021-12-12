@@ -53,7 +53,7 @@ public class PathSplineTrack : MonoBehaviour {
 
 	// Use this for visualizing what the track looks like in the editor (for a full suite of spline tools check out the LeanTween Editor)
 	void OnDrawGizmos(){
-		LTSpline.drawGizmo( trackOnePoints, Color.red);
+        LTSpline.drawGizmo(trackOnePoints, UnityEngine.Color.red);
 	}
 
 	// Make your own LeanAudio sounds at http://leanaudioplay.dentedpixel.com

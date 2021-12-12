@@ -24,9 +24,9 @@ public static class LeanTweenExt
     public static void LeanCancel(this RectTransform rectTransform) { LeanTween.cancel(rectTransform); }
     //LeanTween.cancelAll
     //LeanTween.color
-    public static LTDescr LeanColor(this GameObject gameObject, Color to, float time) { return LeanTween.color(gameObject, to, time); }
+    public static LTDescr LeanColor(this GameObject gameObject, UnityEngine.Color to, float time) { return LeanTween.color(gameObject, to, time); }
     //LeanTween.colorText
-    public static LTDescr LeanColorText(this RectTransform rectTransform, Color to, float time) { return LeanTween.colorText(rectTransform, to, time); }
+    public static LTDescr LeanColorText(this RectTransform rectTransform, UnityEngine.Color to, float time) { return LeanTween.colorText(rectTransform, to, time); }
     //LeanTween.delayedCall
     public static LTDescr LeanDelayedCall(this GameObject gameObject, float delayTime, System.Action callback) { return LeanTween.delayedCall(gameObject, delayTime, callback); }
     public static LTDescr LeanDelayedCall(this GameObject gameObject, float delayTime, System.Action<object> callback) { return LeanTween.delayedCall(gameObject, delayTime, callback); }
@@ -143,7 +143,7 @@ public static class LeanTweenExt
     public static LTDescr LeanSize(this RectTransform rectTransform, Vector2 to, float time) { return LeanTween.size(rectTransform, to, time); }
     //LeanTween.tweensRunning
     //LeanTween.value (Color)
-    public static LTDescr LeanValue(this GameObject gameObject, Color from, Color to, float time) { return LeanTween.value(gameObject, from, to, time); }
+    public static LTDescr LeanValue(this GameObject gameObject, UnityEngine.Color from, UnityEngine.Color to, float time) { return LeanTween.value(gameObject, from, to, time); }
     //LeanTween.value (Color)
     //LeanTween.value (float)
     public static LTDescr LeanValue(this GameObject gameObject, float from, float to, float time) { return LeanTween.value(gameObject, from, to, time); }
@@ -153,7 +153,7 @@ public static class LeanTweenExt
     public static LTDescr LeanValue(this GameObject gameObject, Action<float> callOnUpdate, float from, float to, float time) { return LeanTween.value(gameObject, callOnUpdate, from, to, time); }
     public static LTDescr LeanValue(this GameObject gameObject, Action<float, float> callOnUpdate, float from, float to, float time) { return LeanTween.value(gameObject, callOnUpdate, from, to, time); }
     public static LTDescr LeanValue(this GameObject gameObject, Action<float, object> callOnUpdate, float from, float to, float time) { return LeanTween.value(gameObject, callOnUpdate, from, to, time); }
-    public static LTDescr LeanValue(this GameObject gameObject, Action<Color> callOnUpdate, Color from, Color to, float time) { return LeanTween.value(gameObject, callOnUpdate, from, to, time); }
+    public static LTDescr LeanValue(this GameObject gameObject, Action<UnityEngine.Color> callOnUpdate, UnityEngine.Color from, UnityEngine.Color to, float time) { return LeanTween.value(gameObject, callOnUpdate, from, to, time); }
     public static LTDescr LeanValue(this GameObject gameObject, Action<Vector2> callOnUpdate, Vector2 from, Vector2 to, float time) { return LeanTween.value(gameObject, callOnUpdate, from, to, time); }
     public static LTDescr LeanValue(this GameObject gameObject, Action<Vector3> callOnUpdate, Vector3 from, Vector3 to, float time) { return LeanTween.value(gameObject, callOnUpdate, from, to, time); }
 
@@ -180,7 +180,7 @@ public static class LeanTweenExt
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, val);
     }
 
-    public static Color LeanColor(this Transform transform)
+    public static UnityEngine.Color LeanColor(this Transform transform)
     {
         return transform.GetComponent<Renderer>().material.color;
     }

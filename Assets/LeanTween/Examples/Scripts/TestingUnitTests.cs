@@ -123,7 +123,7 @@ namespace DentedPixel.LTExamples
             LTSpline cr = new LTSpline(splineArr);
             cr.place(cube4.transform, 0.5f);
             LeanTest.expect((Vector3.Distance(cube4.transform.position, new Vector3(10f, 0f, 0f)) <= 0.7f), "SPLINE POSITIONING AT HALFWAY", "position is:" + cube4.transform.position + " but should be:(10f,0f,0f)");
-            LeanTween.color(cube4, Color.green, 0.01f);
+            LeanTween.color(cube4, UnityEngine.Color.green, 0.01f);
 
             //          Debug.Log("Point 2:"+cr.ratioAtPoint(splineArr[2]));
 
@@ -208,8 +208,8 @@ namespace DentedPixel.LTExamples
             });
             // Color
             float onStartTime = -1f;
-            LeanTween.color(cubeAlpha2, Color.cyan, 0.3f).setOnComplete(() => {
-                LeanTest.expect(cubeAlpha2.GetComponent<Renderer>().material.color == Color.cyan, "COLOR");
+            LeanTween.color(cubeAlpha2, UnityEngine.Color.cyan, 0.3f).setOnComplete(() => {
+                LeanTest.expect(cubeAlpha2.GetComponent<Renderer>().material.color == UnityEngine.Color.cyan, "COLOR");
                 LeanTest.expect(onStartTime >= 0f && onStartTime < Time.time, "ON START", "onStartTime:" + onStartTime + " time:" + Time.time);
             }).setOnStart(() => {
                 onStartTime = Time.time;
@@ -541,7 +541,7 @@ namespace DentedPixel.LTExamples
                 cube.name = "a" + i;
                 aGOs[i] = cube;
                 tweensA[i] = LeanTween.move(cube, cube.transform.position + new Vector3(10f, 0, 0), 0.5f + 1f * (1.0f / (float)aGOs.Length)).id;
-                LeanTween.color(cube, Color.red, 0.01f);
+                LeanTween.color(cube, UnityEngine.Color.red, 0.01f);
             }
 
             yield return new WaitForSeconds(1.0f);

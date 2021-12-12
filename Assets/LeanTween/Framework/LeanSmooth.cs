@@ -94,14 +94,14 @@ public class LeanSmooth {
     * fromColor = LeanSmooth.damp(fromColor, transform.GetComponent<Renderer>().material.color, ref velocityColor, 1.1f);\n
     * Debug.Log("current:"+fromColor);
     */
-    public static Color damp(Color current, Color target, ref Color currentVelocity, float smoothTime, float maxSpeed = -1f, float deltaTime = -1f)
+    public static UnityEngine.Color damp(UnityEngine.Color current, UnityEngine.Color target, ref UnityEngine.Color currentVelocity, float smoothTime, float maxSpeed = -1f, float deltaTime = -1f)
     {
         float r = damp(current.r, target.r, ref currentVelocity.r, smoothTime, maxSpeed, deltaTime);
         float g = damp(current.g, target.g, ref currentVelocity.g, smoothTime, maxSpeed, deltaTime);
         float b = damp(current.b, target.b, ref currentVelocity.b, smoothTime, maxSpeed, deltaTime);
         float a = damp(current.a, target.a, ref currentVelocity.a, smoothTime, maxSpeed, deltaTime);
 
-        return new Color(r, g, b, a);
+        return new UnityEngine.Color(r, g, b, a);
     }
 
     /**
@@ -180,14 +180,14 @@ public class LeanSmooth {
     * fromColor = LeanSmooth.spring(fromColor, transform.GetComponent<Renderer>().material.color, ref velocityColor, 1.1f);\n
     * Debug.Log("current:"+fromColor);
     */
-    public static Color spring(Color current, Color target, ref Color currentVelocity, float smoothTime, float maxSpeed = -1f, float deltaTime = -1f, float friction = 2f, float accelRate = 0.5f)
+    public static UnityEngine.Color spring(UnityEngine.Color current, UnityEngine.Color target, ref UnityEngine.Color currentVelocity, float smoothTime, float maxSpeed = -1f, float deltaTime = -1f, float friction = 2f, float accelRate = 0.5f)
     {
         float r = spring(current.r, target.r, ref currentVelocity.r, smoothTime, maxSpeed, deltaTime, friction, accelRate);
         float g = spring(current.g, target.g, ref currentVelocity.g, smoothTime, maxSpeed, deltaTime, friction, accelRate);
         float b = spring(current.b, target.b, ref currentVelocity.b, smoothTime, maxSpeed, deltaTime, friction, accelRate);
         float a = spring(current.a, target.a, ref currentVelocity.a, smoothTime, maxSpeed, deltaTime, friction, accelRate);
 
-        return new Color(r, g, b, a);
+        return new UnityEngine.Color(r, g, b, a);
     }
 
     /**
@@ -255,14 +255,14 @@ public class LeanSmooth {
     * fromColor = LeanSmooth.linear(fromColor, transform.GetComponent<Renderer>().material.color, 50f);\n
     * Debug.Log("current:"+fromColor);
     */
-    public static Color linear(Color current, Color target, float moveSpeed)
+    public static UnityEngine.Color linear(UnityEngine.Color current, UnityEngine.Color target, float moveSpeed)
     {
         float r = linear(current.r, target.r, moveSpeed);
         float g = linear(current.g, target.g, moveSpeed);
         float b = linear(current.b, target.b, moveSpeed);
         float a = linear(current.a, target.a, moveSpeed);
 
-        return new Color(r, g, b, a);
+        return new UnityEngine.Color(r, g, b, a);
     }
 
     /**
@@ -352,13 +352,13 @@ public class LeanSmooth {
     * fromColor = LeanSmooth.bounceOut(fromColor, transform.GetComponent<Renderer>().material.color, ref followVelocity, 1.1f);\n
     * Debug.Log("current:" + fromColor);
     */
-    public static Color bounceOut(Color current, Color target, ref Color currentVelocity, float smoothTime, float maxSpeed = -1f, float deltaTime = -1f, float friction = 2f, float accelRate = 0.5f, float hitDamping = 0.9f)
+    public static UnityEngine.Color bounceOut(UnityEngine.Color current, UnityEngine.Color target, ref UnityEngine.Color currentVelocity, float smoothTime, float maxSpeed = -1f, float deltaTime = -1f, float friction = 2f, float accelRate = 0.5f, float hitDamping = 0.9f)
     {
         float r = bounceOut(current.r, target.r, ref currentVelocity.r, smoothTime, maxSpeed, deltaTime, friction, accelRate, hitDamping);
         float g = bounceOut(current.g, target.g, ref currentVelocity.g, smoothTime, maxSpeed, deltaTime, friction, accelRate, hitDamping);
         float b = bounceOut(current.b, target.b, ref currentVelocity.b, smoothTime, maxSpeed, deltaTime, friction, accelRate, hitDamping);
         float a = bounceOut(current.a, target.a, ref currentVelocity.a, smoothTime, maxSpeed, deltaTime, friction, accelRate, hitDamping);
 
-        return new Color(r, g, b, a);
+        return new UnityEngine.Color(r, g, b, a);
     }
 }

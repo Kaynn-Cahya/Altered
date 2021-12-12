@@ -401,12 +401,12 @@ public class LTDescr
 				if(trans.GetComponent<Renderer>()!=null && trans.GetComponent<Renderer>().material.HasProperty("_Color")){
 					this.fromInternal.x = trans.GetComponent<Renderer>().material.color.a;
 				}else if(trans.GetComponent<Renderer>()!=null && trans.GetComponent<Renderer>().material.HasProperty("_TintColor")){
-					Color col = trans.GetComponent<Renderer>().material.GetColor("_TintColor");
+                    UnityEngine.Color col = trans.GetComponent<Renderer>().material.GetColor("_TintColor");
 					this.fromInternal.x = col.a;
 				}else if(trans.childCount>0){
 					foreach (Transform child in trans) {
 						if(child.gameObject.GetComponent<Renderer>()!=null){
-							Color col = child.gameObject.GetComponent<Renderer>().material.color;
+                            UnityEngine.Color col = child.gameObject.GetComponent<Renderer>().material.color;
 							this.fromInternal.x = col.a;
 							break;
 						}
@@ -421,7 +421,7 @@ public class LTDescr
 				alphaRecursive(this.trans, val, this.useRecursion);
 				#else
 				if(this.spriteRen!=null){
-					this.spriteRen.color = new Color( this.spriteRen.color.r, this.spriteRen.color.g, this.spriteRen.color.b, val);
+					this.spriteRen.color = new UnityEngine.Color( this.spriteRen.color.r, this.spriteRen.color.g, this.spriteRen.color.b, val);
 					alphaRecursiveSprite(this.trans, val);
 				}else{
 					alphaRecursive(this.trans, val, this.useRecursion);
@@ -437,7 +437,7 @@ public class LTDescr
 			alphaRecursive(this.trans, val, this.useRecursion);
 			#else
 			if(this.spriteRen!=null){
-				this.spriteRen.color = new Color( this.spriteRen.color.r, this.spriteRen.color.g, this.spriteRen.color.b, val);
+				this.spriteRen.color = new UnityEngine.Color( this.spriteRen.color.r, this.spriteRen.color.g, this.spriteRen.color.b, val);
 				alphaRecursiveSprite(this.trans, val);
 			}else{
 				alphaRecursive(this.trans, val, this.useRecursion);
@@ -474,7 +474,7 @@ public class LTDescr
 				mesh.colors32 = colors;
 			}// fix end
 			Color32 c = mesh.colors32[0];
-			c = new Color( c.r, c.g, c.b, val);
+			c = new UnityEngine.Color( c.r, c.g, c.b, val);
 			for (int k= 0; k < vertices.Length; k++)
 				colors[k] = c;
 			mesh.colors32 = colors;
@@ -502,15 +502,15 @@ public class LTDescr
 				this.setFromColor( renColor.color );
 			}else{
 				if(trans.GetComponent<Renderer>()!=null && trans.GetComponent<Renderer>().material.HasProperty("_Color")){
-					Color col = trans.GetComponent<Renderer>().material.color;
+                    UnityEngine.Color col = trans.GetComponent<Renderer>().material.color;
 					this.setFromColor( col );
 				}else if(trans.GetComponent<Renderer>()!=null && trans.GetComponent<Renderer>().material.HasProperty("_TintColor")){
-					Color col = trans.GetComponent<Renderer>().material.GetColor ("_TintColor");
+                    UnityEngine.Color col = trans.GetComponent<Renderer>().material.GetColor ("_TintColor");
 					this.setFromColor( col );
 				}else if(trans.childCount>0){
 					foreach (Transform child in trans) {
 						if(child.gameObject.GetComponent<Renderer>()!=null){
-							Color col = child.gameObject.GetComponent<Renderer>().material.color;
+                            UnityEngine.Color col = child.gameObject.GetComponent<Renderer>().material.color;
 							this.setFromColor( col );
 							break;
 						}
@@ -522,7 +522,7 @@ public class LTDescr
 		this.easeInternal = ()=>{
 			newVect = easeMethod();
 			val = newVect.x;
-			Color toColor = tweenColor(this, val);
+            UnityEngine.Color toColor = tweenColor(this, val);
 
 			#if !UNITY_3_5 && !UNITY_4_0 && !UNITY_4_0_1 && !UNITY_4_1 && !UNITY_4_2
 
@@ -553,7 +553,7 @@ public class LTDescr
 		this.easeInternal = ()=>{
 			newVect = easeMethod();
 			val = newVect.x;
-			Color toColor = tweenColor(this, val);
+            UnityEngine.Color toColor = tweenColor(this, val);
 
 			#if !UNITY_3_5 && !UNITY_4_0 && !UNITY_4_0_1 && !UNITY_4_1 && !UNITY_4_2
 			if(this.spriteRen!=null){
@@ -584,12 +584,12 @@ public class LTDescr
 		this.type = TweenAction.TEXT_COLOR;
 		this.initInternal = ()=>{
 			this.uiText = trans.GetComponent<UnityEngine.UI.Text>();
-			this.setFromColor( this.uiText != null ? this.uiText.color : Color.white );
+			this.setFromColor( this.uiText != null ? this.uiText.color : UnityEngine.Color.white );
 		};
 		this.easeInternal = ()=>{
 			newVect = easeMethod();
 			val = newVect.x;
-			Color toColor = tweenColor(this, val);
+            UnityEngine.Color toColor = tweenColor(this, val);
 			this.uiText.color = toColor;
 			if (dt!=0f && this._optional.onUpdateColor != null)
 				this._optional.onUpdateColor(toColor);
@@ -620,9 +620,9 @@ public class LTDescr
 			newVect = easeMethod();
 			val = newVect.x;
 			if(this.uiImage!=null){
-				Color c = this.uiImage.color; c.a = val; this.uiImage.color = c;
+                UnityEngine.Color c = this.uiImage.color; c.a = val; this.uiImage.color = c;
 			}else if(this.rawImage!=null){
-				Color c = this.rawImage.color; c.a = val; this.rawImage.color = c;
+                UnityEngine.Color c = this.rawImage.color; c.a = val; this.rawImage.color = c;
 			}
 			if(this.useRecursion){
 				alphaRecursive( this.rectTransform, val, 0 );
@@ -645,7 +645,7 @@ public class LTDescr
 			this.uiImage = trans.GetComponent<UnityEngine.UI.Image>();
 			if(this.uiImage==null){
 				this.rawImage = trans.GetComponent<UnityEngine.UI.RawImage>();
-				this.setFromColor( this.rawImage!=null ? this.rawImage.color : Color.white );
+				this.setFromColor( this.rawImage!=null ? this.rawImage.color : UnityEngine.Color.white );
 			}else{
 				this.setFromColor( this.uiImage.color );
 			}
@@ -654,7 +654,7 @@ public class LTDescr
 		this.easeInternal = ()=>{
 			newVect = easeMethod();
 			val = newVect.x;
-			Color toColor = tweenColor(this, val);
+            UnityEngine.Color toColor = tweenColor(this, val);
 			if(this.uiImage!=null){
 				this.uiImage.color = toColor;
 			}else if(this.rawImage!=null){
@@ -1033,7 +1033,7 @@ public class LTDescr
 
 	// Helper Methods
 
-	public LTDescr setFromColor( Color col ){
+	public LTDescr setFromColor(UnityEngine.Color col ){
 		this.from = new Vector3(0.0f, col.a, 0.0f);
 		this.diff = new Vector3(1.0f,0.0f,0.0f);
 		this._optional.axis = new Vector3( col.r, col.g, col.b );
@@ -1045,10 +1045,10 @@ public class LTDescr
 		if(renderer!=null){
 			foreach(Material mat in renderer.materials){
 				if(mat.HasProperty("_Color")){
-					mat.color = new Color( mat.color.r, mat.color.g, mat.color.b, val);
+					mat.color = new UnityEngine.Color( mat.color.r, mat.color.g, mat.color.b, val);
 				}else if(mat.HasProperty("_TintColor")){
-					Color col = mat.GetColor ("_TintColor");
-					mat.SetColor("_TintColor", new Color( col.r, col.g, col.b, val));
+                    UnityEngine.Color col = mat.GetColor ("_TintColor");
+					mat.SetColor("_TintColor", new UnityEngine.Color( col.r, col.g, col.b, val));
 				}
 			}
 		}
@@ -1059,7 +1059,7 @@ public class LTDescr
 		}
 	}
 
-	private static void colorRecursive( Transform transform, Color toColor, bool useRecursion = true ){
+	private static void colorRecursive( Transform transform, UnityEngine.Color toColor, bool useRecursion = true ){
 		Renderer ren = transform.gameObject.GetComponent<Renderer>();
 		if(ren!=null){
 			foreach(Material mat in ren.materials){
@@ -1080,11 +1080,11 @@ public class LTDescr
 			foreach (RectTransform child in rectTransform) {
 				UnityEngine.UI.MaskableGraphic uiImage = child.GetComponent<UnityEngine.UI.Image>();
 				if (uiImage != null) {
-					Color c = uiImage.color; c.a = val; uiImage.color = c;
+                    UnityEngine.Color c = uiImage.color; c.a = val; uiImage.color = c;
 				} else {
 					uiImage = child.GetComponent<UnityEngine.UI.RawImage>();
 					if (uiImage != null) {
-						Color c = uiImage.color; c.a = val; uiImage.color = c;
+                        UnityEngine.Color c = uiImage.color; c.a = val; uiImage.color = c;
 					}
 				}
 
@@ -1098,13 +1098,13 @@ public class LTDescr
 			foreach (Transform child in transform) {
 				SpriteRenderer ren = child.GetComponent<SpriteRenderer>();
 				if(ren!=null)
-					ren.color = new Color( ren.color.r, ren.color.g, ren.color.b, val);
+					ren.color = new UnityEngine.Color( ren.color.r, ren.color.g, ren.color.b, val);
 				alphaRecursiveSprite(child, val);
 			}
 		}
 	}
 
-	private static void colorRecursiveSprite( Transform transform, Color toColor ){
+	private static void colorRecursiveSprite( Transform transform, UnityEngine.Color toColor ){
 		if(transform.childCount>0){
 			foreach (Transform child in transform) {
 				SpriteRenderer ren = transform.gameObject.GetComponent<SpriteRenderer>();
@@ -1115,7 +1115,7 @@ public class LTDescr
 		}
 	}
 
-	private static void colorRecursive( RectTransform rectTransform, Color toColor ){
+	private static void colorRecursive( RectTransform rectTransform, UnityEngine.Color toColor ){
 
 		if(rectTransform.childCount>0){
 			foreach (RectTransform child in rectTransform) {
@@ -1138,7 +1138,7 @@ public class LTDescr
 			foreach (Transform child in trans) {
 				UnityEngine.UI.Text uiText = child.GetComponent<UnityEngine.UI.Text>();
 				if(uiText!=null){
-					Color c = uiText.color;
+                    UnityEngine.Color c = uiText.color;
 					c.a = val;
 					uiText.color = c;
 				}
@@ -1150,7 +1150,7 @@ public class LTDescr
 	private static void textAlphaRecursive( Transform trans, float val, bool useRecursion = true ){
 		UnityEngine.UI.Text uiText = trans.GetComponent<UnityEngine.UI.Text>();
 		if(uiText!=null){
-			Color c = uiText.color;
+            UnityEngine.Color c = uiText.color;
 			c.a = val;
 			uiText.color = c;
 		}
@@ -1161,7 +1161,7 @@ public class LTDescr
 		}
 	}
 
-	private static void textColorRecursive(Transform trans, Color toColor ){
+	private static void textColorRecursive(Transform trans, UnityEngine.Color toColor ){
 		if(trans.childCount>0){
 			foreach (Transform child in trans) {
 				UnityEngine.UI.Text uiText = child.GetComponent<UnityEngine.UI.Text>();
@@ -1174,10 +1174,10 @@ public class LTDescr
 	}
 	#endif
 
-	private static Color tweenColor( LTDescr tween, float val ){
+	private static UnityEngine.Color tweenColor( LTDescr tween, float val ){
 		Vector3 diff3 = tween._optional.point - tween._optional.axis;
 		float diffAlpha = tween.to.y - tween.from.y;
-		return new Color(tween._optional.axis.x + diff3.x*val, tween._optional.axis.y + diff3.y*val, tween._optional.axis.z + diff3.z*val, tween.from.y + diffAlpha*val);
+		return new UnityEngine.Color(tween._optional.axis.x + diff3.x* val, tween._optional.axis.y + diff3.y* val, tween._optional.axis.z + diff3.z* val, tween.from.y + diffAlpha* val);
 	}
 
 	/**
@@ -2026,12 +2026,12 @@ public class LTDescr
 		this.hasUpdateCallback = true;
 		return this;
 	}
-	public LTDescr setOnUpdateColor( Action<Color> onUpdate ){
+	public LTDescr setOnUpdateColor( Action<UnityEngine.Color> onUpdate ){
 		this._optional.onUpdateColor = onUpdate;
 		this.hasUpdateCallback = true;
 		return this;
 	}
-	public LTDescr setOnUpdateColor( Action<Color,object> onUpdate ){
+	public LTDescr setOnUpdateColor( Action<UnityEngine.Color,object> onUpdate ){
 		this._optional.onUpdateColorObject = onUpdate;
 		this.hasUpdateCallback = true;
 		return this;
@@ -2039,13 +2039,13 @@ public class LTDescr
 
 	#if !UNITY_FLASH
 
-	public LTDescr setOnUpdate( Action<Color> onUpdate ){
+	public LTDescr setOnUpdate( Action<UnityEngine.Color> onUpdate ){
 		this._optional.onUpdateColor = onUpdate;
 		this.hasUpdateCallback = true;
 		return this;
 	}
 
-	public LTDescr setOnUpdate( Action<Color,object> onUpdate ){
+	public LTDescr setOnUpdate( Action<UnityEngine.Color,object> onUpdate ){
 		this._optional.onUpdateColorObject = onUpdate;
 		this.hasUpdateCallback = true;
 		return this;

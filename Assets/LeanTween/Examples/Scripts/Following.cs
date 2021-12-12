@@ -20,7 +20,7 @@ public class Following : MonoBehaviour {
     public Transform dude4Title;
     public Transform dude5Title;
 
-    private Color dude1ColorVelocity;
+    private UnityEngine.Color dude1ColorVelocity;
 
     private Vector3 velocityPos;
 
@@ -66,8 +66,8 @@ public class Following : MonoBehaviour {
     private float velocityY;
     private Vector3 fromVec3;
     private Vector3 velocityVec3;
-    private Color fromColor;
-    private Color velocityColor;
+    private UnityEngine.Color fromColor;
+    private UnityEngine.Color velocityColor;
 
     private void Update()
     {
@@ -82,7 +82,7 @@ public class Following : MonoBehaviour {
     {
         LeanTween.moveLocalY(followArrow.gameObject, Random.Range(-100f, 100f), 0f);
 
-        var randomCol = new Color(Random.value, Random.value, Random.value);
+        var randomCol = new UnityEngine.Color(Random.value, Random.value, Random.value);
         LeanTween.color(followArrow.gameObject, randomCol, 0f);
 
         var randomVal = Random.Range(5f, 10f);

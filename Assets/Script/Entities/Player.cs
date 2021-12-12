@@ -17,7 +17,7 @@ public class Player : Singleton<Player> {
     [SerializeField]
     private float moveSpeed;
 
-    public Colour CurrentColour {
+    public ColorEnum CurrentColour {
         get; private set;
     }
 
@@ -36,7 +36,7 @@ public class Player : Singleton<Player> {
     private void Start() {
         controller = GetComponent<CharacterController2D>();
 
-        CurrentColour = new Colour(ColourEnum.BLUE);
+        CurrentColour = ColorEnum.BLUE;
         SetHatColour();
         size = transform.localScale;
     }
@@ -58,20 +58,17 @@ public class Player : Singleton<Player> {
     }
 
     private void SetHatColour() {
-
-        if (ColorUtility.TryParseHtmlString(CurrentColour.GetHexColor(), out Color color)) {
-            foreach (var sprite in hatsSprite) {
-                sprite.color = color;
-            }
-        } else {
-            Debug.LogError("Player.cs :: 'SetHatColour()' color is invalid");
+        UnityEngine.Color color = CurrentColour.GetColor();
+        foreach (var sprite in hatsSprite) {
+            sprite.color = color;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Collectable")) {
             GameManager.Instance.AddScore(5);
-            CurrentColour = collision.GetComponent<Collectable>().Colour;
+            CurrentColour = collision.GetComponent<Collectable>().Color;
             SetHatColour();
             Destroy(collision.gameObject);
             EnemyManager.Instance.TriggerPlayerColourChanged();
@@ -85,7 +82,7 @@ public class Player : Singleton<Player> {
         }
 
         if (collision.gameObject.CompareTag("Enemy")) {
-            if (!collision.gameObject.GetComponent<Enemy>().Colour.ColourMatch(CurrentColour)) {
+            if (collision.gameObject.GetComponent<Enemy>().Color != CurrentColour) {
                 AudioManager.Instance.PlayDeathAudio();
                 Die();
             }
@@ -112,11 +109,8 @@ public class Player : Singleton<Player> {
         GameObject particle = Instantiate(deathParticle);
         particle.transform.position = transform.position;
 
-        if (ColorUtility.TryParseHtmlString("#EABA6B", out Color color)) {
-            color.a = 0.6f;
-            particle.GetComponent<ParticleSystem>().startColor = color;
-        } else {
-            Debug.LogError("Player.cs :: 'SpawnDeathParticle()' color is invalid");
-        }
+        var color = ColorEnum.ORANGE.GetColor();
+        color.a = 0.6f;
+        particle.GetComponent<ParticleSystem>().startColor = color;
     }
 }

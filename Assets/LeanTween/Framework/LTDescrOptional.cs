@@ -15,7 +15,7 @@ public class LTDescrOptional  {
 	public LTSpline spline { get; set; }
 	public AnimationCurve animationCurve;
 	public int initFrameCount;
-    public Color color;
+    public UnityEngine.Color color;
 
 	public LTRect ltRect { get; set; } // maybe get rid of this eventually
 
@@ -25,8 +25,8 @@ public class LTDescrOptional  {
 	public Action<Vector2> onUpdateVector2 { get; set; }
 	public Action<Vector3> onUpdateVector3 { get; set; }
 	public Action<Vector3,object> onUpdateVector3Object { get; set; }
-	public Action<Color> onUpdateColor { get; set; }
-	public Action<Color,object> onUpdateColorObject { get; set; }
+	public Action<UnityEngine.Color> onUpdateColor { get; set; }
+	public Action<UnityEngine.Color,object> onUpdateColorObject { get; set; }
 	public Action onComplete { get; set; }
 	public Action<object> onCompleteObject { get; set; }
 	public object onCompleteParam { get; set; }

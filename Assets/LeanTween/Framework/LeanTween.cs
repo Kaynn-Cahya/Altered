@@ -1190,7 +1190,7 @@ public class LeanTween : MonoBehaviour {
     * @example
     * LeanTween.color(gameObject, Color.yellow, 1f) .setDelay(1f);
     */
-    public static LTDescr color(GameObject gameObject, Color to, float time){
+    public static LTDescr color(GameObject gameObject, UnityEngine.Color to, float time){
         LTDescr lt = pushNewTween( gameObject, new Vector3(1.0f, to.a, 0.0f), time, options().setColor().setPoint( new Vector3(to.r, to.g, to.b) ) );
         #if !UNITY_3_5 && !UNITY_4_0 && !UNITY_4_0_1 && !UNITY_4_1 && !UNITY_4_2
         SpriteRenderer ren = gameObject.GetComponent<SpriteRenderer>();
@@ -1211,10 +1211,10 @@ public class LeanTween : MonoBehaviour {
     * @example
     * LeanTween.colorText(gameObject.GetComponent&lt;RectTransform&gt;(), Color.yellow, 1f) .setDelay(1f);
     */
-    public static LTDescr textColor(RectTransform rectTransform, Color to, float time){
+    public static LTDescr textColor(RectTransform rectTransform, UnityEngine.Color to, float time){
         return pushNewTween(rectTransform.gameObject, new Vector3(1.0f, to.a, 0.0f), time, options().setTextColor().setPoint(new Vector3(to.r, to.g, to.b)));
     }
-    public static LTDescr colorText(RectTransform rectTransform, Color to, float time){
+    public static LTDescr colorText(RectTransform rectTransform, UnityEngine.Color to, float time){
         return pushNewTween(rectTransform.gameObject, new Vector3(1.0f, to.a, 0.0f), time, options().setTextColor().setPoint(new Vector3(to.r, to.g, to.b)));
     }
     #endif
@@ -1797,7 +1797,7 @@ public class LeanTween : MonoBehaviour {
     * &#160;Debug.Log("tweened val:"+val);<br />
     * } );<br />
     */
-    public static LTDescr value(GameObject gameObject, Color from, Color to, float time){
+    public static LTDescr value(GameObject gameObject, UnityEngine.Color from, UnityEngine.Color to, float time){
         LTDescr lt = pushNewTween( gameObject, new Vector3(1f, to.a, 0f), time, options().setCallbackColor().setPoint( new Vector3(to.r, to.g, to.b) )
             .setFromColor(from).setHasInitialized(false) );
 
@@ -1888,11 +1888,11 @@ public class LeanTween : MonoBehaviour {
     * }<br />
     */
 
-    public static LTDescr value(GameObject gameObject, Action<Color> callOnUpdate, Color from, Color to, float time){
+    public static LTDescr value(GameObject gameObject, Action<UnityEngine.Color> callOnUpdate, UnityEngine.Color from, UnityEngine.Color to, float time){
         return pushNewTween( gameObject, new Vector3(1.0f,to.a,0.0f), time, options().setCallbackColor().setPoint( new Vector3(to.r, to.g, to.b) )
             .setAxis( new Vector3(from.r, from.g, from.b) ).setFrom( new Vector3(0.0f, from.a, 0.0f) ).setHasInitialized(false).setOnUpdateColor(callOnUpdate) );
     }
-    public static LTDescr value(GameObject gameObject, Action<Color,object> callOnUpdate, Color from, Color to, float time){
+    public static LTDescr value(GameObject gameObject, Action<UnityEngine.Color,object> callOnUpdate, UnityEngine.Color from, UnityEngine.Color to, float time){
         return pushNewTween( gameObject, new Vector3(1.0f,to.a,0.0f), time, options().setCallbackColor().setPoint( new Vector3(to.r, to.g, to.b) )
             .setAxis( new Vector3(from.r, from.g, from.b) ).setFrom( new Vector3(0.0f, from.a, 0.0f) ).setHasInitialized(false).setOnUpdateColor(callOnUpdate) );
     }
@@ -2110,7 +2110,7 @@ public class LeanTween : MonoBehaviour {
     * @return {LTDescr} LTDescr an object that distinguishes the tween
     * @example LeanTween.color(gameObject.GetComponent&lt;RectTransform&gt;(), 0.5f, 1f).setDelay(1f);
     */
-    public static LTDescr color(RectTransform rectTrans, Color to, float time){
+    public static LTDescr color(RectTransform rectTrans, UnityEngine.Color to, float time){
         return pushNewTween( rectTrans.gameObject, new Vector3(1.0f, to.a, 0.0f), time, options().setCanvasColor().setRect( rectTrans ).setPoint( new Vector3(to.r, to.g, to.b) ) );
     }
 
@@ -3115,7 +3115,7 @@ public class LTBezierPath {
             float pm = (float)i / 120f;
             Vector3 currPt2 = point(pm);
             //Gizmos.color = new Color(UnityEngine.Random.Range(0f,1f),UnityEngine.Random.Range(0f,1f),UnityEngine.Random.Range(0f,1f),1);
-            Gizmos.color = (previousBezier == currentBezier) ? Color.magenta : Color.grey;
+            Gizmos.color = (previousBezier == currentBezier) ? UnityEngine.Color.magenta : UnityEngine.Color.grey;
             Gizmos.DrawLine(currPt2, prevPt);
             prevPt = currPt2;
             previousBezier = currentBezier;
@@ -3447,12 +3447,12 @@ public class LTSpline {
         }
     }
 
-    public void drawGizmo( Color color ) {
+    public void drawGizmo(UnityEngine.Color color ) {
         if( this.ptsAdjLength>=4){
 
             Vector3 prevPt = this.ptsAdj[0];
 
-            Color colorBefore = Gizmos.color;
+            UnityEngine.Color colorBefore = Gizmos.color;
             Gizmos.color = color;
             for (int i = 0; i < this.ptsAdjLength; i++) {
                 Vector3 currPt2 = this.ptsAdj[i];
@@ -3465,7 +3465,7 @@ public class LTSpline {
         }
     }
 
-    public static void drawGizmo(Transform[] arr, Color color) {
+    public static void drawGizmo(Transform[] arr, UnityEngine.Color color) {
         if(arr.Length>=4){
             Vector3[] vec3s = new Vector3[arr.Length];
             for(int i = 0; i < arr.Length; i++){
@@ -3474,7 +3474,7 @@ public class LTSpline {
             LTSpline spline = new LTSpline(vec3s);
             Vector3 prevPt = spline.ptsAdj[0];
 
-            Color colorBefore = Gizmos.color;
+            UnityEngine.Color colorBefore = Gizmos.color;
             Gizmos.color = color;
             for (int i = 0; i < spline.ptsAdjLength; i++) {
                 Vector3 currPt2 = spline.ptsAdj[i];
@@ -3488,7 +3488,7 @@ public class LTSpline {
     }
 
 
-    public static void drawLine(Transform[] arr, float width, Color color) {
+    public static void drawLine(Transform[] arr, float width, UnityEngine.Color color) {
         if(arr.Length>=4){
 
         }
@@ -3511,7 +3511,7 @@ public class LTSpline {
                 + .5f * c - .5f * a;
     }*/
 
-    public void drawLinesGLLines(Material outlineMaterial, Color color, float width){
+    public void drawLinesGLLines(Material outlineMaterial, UnityEngine.Color color, float width){
         GL.PushMatrix();
         outlineMaterial.SetPass(0);
         GL.LoadPixelMatrix();
@@ -3638,7 +3638,7 @@ public class LTRect : System.Object{
     public LTGUI.Element_Type type;
     public GUIStyle style;
     public bool useColor = false;
-    public Color color = Color.white;
+    public UnityEngine.Color color = UnityEngine.Color.white;
     public bool fontScaleToFit;
     public bool useSimpleScale;
     public bool sizeByHeight;
@@ -3753,7 +3753,7 @@ public class LTRect : System.Object{
         get{
             if(colorTouched){
                 colorTouched = false;
-                GUI.color = new Color(GUI.color.r,GUI.color.g,GUI.color.b,1.0f);
+                GUI.color = new UnityEngine.Color(GUI.color.r, GUI.color.g, GUI.color.b,1.0f);
             }
             if(rotateEnabled){
                 if(rotateFinished){
@@ -3766,7 +3766,7 @@ public class LTRect : System.Object{
                 }
             }
             if(alphaEnabled){
-                GUI.color = new Color(GUI.color.r,GUI.color.g,GUI.color.b,alpha);
+                GUI.color = new UnityEngine.Color(GUI.color.r, GUI.color.g, GUI.color.b, alpha);
                 colorTouched = true;
             }
             if(fontScaleToFit){
@@ -3794,7 +3794,7 @@ public class LTRect : System.Object{
         return this;
     }
 
-    public LTRect setColor( Color color ){
+    public LTRect setColor(UnityEngine.Color color ){
         this.color = color;
         this.useColor = true;
         return this;
@@ -3859,7 +3859,7 @@ public class LTGUI {
     private static int[] buttonLevels;
     private static int[] buttonLastFrame;
     private static LTRect r;
-    private static Color color = Color.white;
+    private static UnityEngine.Color color = UnityEngine.Color.white;
     private static bool isGUIEnabled = false;
     private static int global_counter = 0;
 

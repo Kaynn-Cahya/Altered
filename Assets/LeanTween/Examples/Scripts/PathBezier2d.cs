@@ -24,8 +24,8 @@ public class PathBezier2d : MonoBehaviour {
 	}
 
 	void OnDrawGizmos(){
-		// Debug.Log("drwaing");
-		Gizmos.color = Color.red;
+        // Debug.Log("drwaing");
+        Gizmos.color = UnityEngine.Color.red;
 		if(visualizePath!=null)
 			visualizePath.gizmoDraw(); // To Visualize the path, use this method
 	}

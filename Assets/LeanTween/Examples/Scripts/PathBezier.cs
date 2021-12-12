@@ -39,7 +39,7 @@ public class PathBezier : MonoBehaviour {
 		// Debug.Log("drwaing");
 		if(cr!=null)
 			OnEnable();
-		Gizmos.color = Color.red;
+            Gizmos.color = UnityEngine.Color.red;
 		if(cr!=null)
 			cr.gizmoDraw(); // To Visualize the path, use this method
 	}

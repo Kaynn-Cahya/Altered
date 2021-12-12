@@ -19,7 +19,7 @@ public class CollectableSpawner : Spawner {
     }
 
     protected override void Spawn() {
-        List<Colour> avaibleColours = getNonPlayerColours();
+        List<ColorEnum> avaibleColours = getNonPlayerColours();
 
         // Spawnpoint 1 shouldn't be same as spawnpoint 2
         int spawnPoint1 = Random.Range(0, spawnPoints.Length);
@@ -33,24 +33,24 @@ public class CollectableSpawner : Spawner {
 
         #region Local_Function
 
-        static List<Colour> getNonPlayerColours() {
-            List<Colour> nonPlayerColours = new List<Colour>() {
-                new Colour(ColourEnum.BLUE),
-                new Colour(ColourEnum.GREEN),
-                new Colour(ColourEnum.PINK)
+        static List<ColorEnum> getNonPlayerColours() {
+            List<ColorEnum> nonPlayerColours = new List<ColorEnum>() {
+                 ColorEnum.BLUE,
+                 ColorEnum.GREEN,
+                 ColorEnum.PINK
             };
-            nonPlayerColours.RemoveAll(x => x.ColourMatch(Player.Instance.CurrentColour));
+            nonPlayerColours.RemoveAll(x => x == Player.Instance.CurrentColour);
             return nonPlayerColours;
         }
 
         #endregion
     }
 
-    private IEnumerator StartSpawning(Colour colour, Vector2 point) {
+    private IEnumerator StartSpawning(ColorEnum colour, Vector2 point) {
         var warningParticle = Instantiate(spawnWarningParticle);
         warningParticle.transform.position = point;
 
-        Color color = colour.GetUnityColor();
+        Color color = colour.GetColor();
         color.a = 0.7f;
         warningParticle.GetComponent<ParticleSystem>().startColor = color;
 

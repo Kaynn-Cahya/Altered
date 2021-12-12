@@ -78,7 +78,7 @@ public class PathSplinePerformance : MonoBehaviour {
 	// Use this for visualizing what the track looks like in the editor (for a full suite of spline tools check out the LeanTween Editor)
 	void OnDrawGizmos(){
 		if(track!=null)
-			track.drawGizmo( Color.red );
+            track.drawGizmo(UnityEngine.Color.red );
 	}
 
 	// Make your own LeanAudio sounds at http://leanaudioplay.dentedpixel.com
