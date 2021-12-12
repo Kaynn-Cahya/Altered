@@ -93,7 +93,15 @@ public class Enemy : SpawnableObject {
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision) {
+        CollisionTriggered(collision);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision) {
+        CollisionTriggered(collision);
+    }
+
+    private void CollisionTriggered(Collision2D collision) {
         var playerColour = player.CurrentColour;
 
         if (collision.gameObject.CompareTag("Player")) {

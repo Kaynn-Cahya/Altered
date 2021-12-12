@@ -23,7 +23,13 @@ public class NewgroundsManager : Singleton<NewgroundsManager> {
         P_200 = 66580
     }
 
-    private const int SCORE_BOARD_ID = 11148;
+    public enum BOARD_TYPE {
+        HIGHEST_SCORE,
+        TOTAL_SCORE
+    }
+    private const int HIGHESTSCORE_BOARD_ID = 11148;
+
+    private const int TOTALSCORE_BOARD_ID = 11162;
 
     [SerializeField]
     private core newgroundCore;
@@ -52,25 +58,33 @@ public class NewgroundsManager : Singleton<NewgroundsManager> {
     #region Leaderboards
 
 
-    public void AddScoreToLeaderboard(int scoreValue) {
+    public void AddScoreToLeaderboard(int scoreValue, BOARD_TYPE boardType) {
 
         if (!ValidForNewgroundsAPI()) {
             return;
         }
 
         postScore pScore = new postScore {
-            id = SCORE_BOARD_ID,
+            id = GetBoardIDByType(),
             value = scoreValue,
             tag = Application.version
         };
 
-        pScore.callWith(newgroundCore, onScoreSent);
-    }
+        pScore.callWith(newgroundCore);
 
-    private void onScoreSent(io.newgrounds.results.ScoreBoard.postScore obj) {
-        Debug.Log("Posted score: " + obj.scoreboard.name + " of value " + obj.score.value);
+        #region Local_Function
+        int GetBoardIDByType() {
+            if (boardType == BOARD_TYPE.HIGHEST_SCORE) {
+                return HIGHESTSCORE_BOARD_ID;
+            }
+            if (boardType == BOARD_TYPE.TOTAL_SCORE) {
+                return TOTALSCORE_BOARD_ID;
+            }
+            Debug.LogWarning("Newgrounds Score Board ID for " + boardType.ToString() + " not found!");
+            return 0;
+        }
+        #endregion
     }
-
     #endregion
 
     #region Medals

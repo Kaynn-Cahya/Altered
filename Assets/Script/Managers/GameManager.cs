@@ -35,8 +35,15 @@ public class GameManager : Singleton<GameManager> {
         gameOverUI.blocksRaycasts = false;
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.R) && GameOver) {
+            Retry();
+        }
+    }
+
     public void TriggerGameOver() {
-        NewgroundsManager.Instance.AddScoreToLeaderboard(Score);
+        NewgroundsManager.Instance.AddScoreToLeaderboard(Score, NewgroundsManager.BOARD_TYPE.HIGHEST_SCORE);
+        NewgroundsManager.Instance.AddScoreToLeaderboard(Score, NewgroundsManager.BOARD_TYPE.TOTAL_SCORE);
 
         bool newHighscore = false;
         int highestScore = SaveManager.Instance.LoadHighscore();
@@ -56,6 +63,7 @@ public class GameManager : Singleton<GameManager> {
         void EnableInteraction() {
             gameOverUI.interactable = true;
             gameOverUI.blocksRaycasts = true;
+            gameOverFullyShown = true;
         }
         #endregion
     }
