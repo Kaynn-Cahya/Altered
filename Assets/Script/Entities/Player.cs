@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController2D))]
 public class Player : Singleton<Player> {
+    // TODO: Refactor Dash controllers into it's own script
 
     [SerializeField]
     private int PLAYER_LAYER = 7;
@@ -29,6 +31,15 @@ public class Player : Singleton<Player> {
     [SerializeField]
     private float dashDuration;
 
+    [SerializeField]
+    private float dashCooldown;
+
+    [SerializeField]
+    private TextMeshPro dashReadyText;
+
+    [SerializeField]
+    private Transform groundChecker;
+
     public ColorEnum CurrentColour {
         get; private set;
     }
@@ -51,6 +62,8 @@ public class Player : Singleton<Player> {
     private int lastMoveDirection;
     private Timer dashTimer;
     private float gravityScale;
+    private Timer dashCooldownTimer;
+    private bool canDash;
 
     private void Start() {
         controller = GetComponent<CharacterController2D>();
@@ -62,16 +75,25 @@ public class Player : Singleton<Player> {
         SetHatColour();
         size = transform.localScale;
         isDashing = false;
+        canDash = true;
 
         dashTimer = new Timer(dashDuration, delegate {
             ToggleDashing(false);
+        });
+
+        dashCooldownTimer = new Timer(dashCooldown, delegate {
+            canDash = true;
+            FlashDashReady();
+            AudioManager.Instance.PlayAudio(AudioType.DASH_READY);
         });
     }
 
     private void Update() {
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.L)) {
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.L)) && canDash) {
             ToggleDashing(true);
+        } else if (!canDash) {
+            dashCooldownTimer.Update(Time.deltaTime);
         }
 
         if (isDashing) {
@@ -125,8 +147,17 @@ public class Player : Singleton<Player> {
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
-        if (isDashing && collision.gameObject.CompareTag("World")) {
-            ToggleDashing(false);
+        if (isDashing) {
+            bool stopDashing = collision.gameObject.CompareTag("PlayerBorder");
+            if (collision.gameObject.CompareTag("World")) {
+                if (collision.gameObject.transform.position.y > groundChecker.position.y) {
+                    stopDashing = true;
+                }
+            }
+
+            if (stopDashing) {
+                ToggleDashing(false);
+            }
         }
 
         if (immune) {
@@ -146,10 +177,12 @@ public class Player : Singleton<Player> {
         Physics2D.IgnoreLayerCollision(PLAYER_LAYER, ENEMY_LAYER, dashing);
 
         if (dashing) {
+            canDash = false;
             jumping = false;
             SetPlayerAlpha(0.6f);
             playerRigidbody.gravityScale = 0f;
 
+            dashCooldownTimer.Reset(dashCooldown);
             AudioManager.Instance.PlayAudio(AudioType.DASH);
         } else {
             SetPlayerAlpha(1f);
@@ -190,5 +223,14 @@ public class Player : Singleton<Player> {
         var color = ColorEnum.ORANGE.GetColor();
         color.a = 0.6f;
         particle.GetComponent<ParticleSystem>().startColor = color;
+    }
+
+    private void FlashDashReady() {
+        dashReadyText.LeanAlphaText(1f, 0.1f).setOnComplete(FadeBack);
+        #region Local_Function
+        void FadeBack() {
+            dashReadyText.LeanAlphaText(0f, 1f).setEaseLinear();
+        }
+        #endregion
     }
 }

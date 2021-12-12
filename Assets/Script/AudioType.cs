@@ -2,5 +2,6 @@
 public enum AudioType {
     DEATH,
     DASH,
-    COLLECT
+    COLLECT,
+    DASH_READY
 }

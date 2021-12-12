@@ -254,8 +254,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainAudioSource: {fileID: 148285381}
-  collectAudio: {fileID: 8300000, guid: 31b649ae18685cb47a8423db10573ee1, type: 3}
-  deathAudio: {fileID: 8300000, guid: 8494d2a2d0ae52841b214682273fef6a, type: 3}
+  audioCollection:
+  - audioType: 0
+    audioClip: {fileID: 8300000, guid: 8494d2a2d0ae52841b214682273fef6a, type: 3}
+  - audioType: 1
+    audioClip: {fileID: 8300000, guid: 670c1213a4faa204ba65f6c10416ea4c, type: 3}
+  - audioType: 2
+    audioClip: {fileID: 8300000, guid: 31b649ae18685cb47a8423db10573ee1, type: 3}
+  - audioType: 3
+    audioClip: {fileID: 8300000, guid: 2462932988044fb4288c5d8bdd7d8407, type: 3}
 --- !u!4 &148285383
 Transform:
   m_ObjectHideFlags: 0
