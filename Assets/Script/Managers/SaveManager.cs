@@ -9,7 +9,7 @@ public class SaveManager : Singleton<SaveManager> {
     }
 
     public int LoadHighscore() {
-        return PlayerPrefs.GetInt("hsvalue");
+        return PlayerPrefs.GetInt("hsvalue", 0);
     }
 
     public void SaveVolume(float volume) {

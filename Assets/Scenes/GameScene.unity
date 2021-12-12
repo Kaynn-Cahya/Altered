@@ -163,12 +163,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7732708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a06902729afe446a28061739f9bb9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cc4d207ff4e24a4fb314425c2dd8fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 444754045683138360, guid: a3e17a85961122d4bb96bd91ae5d9cb9, type: 3}
   maxSpawnTime: 10
-  minSpawnTime: 25
+  minSpawnTime: 20
+  startSpawnChance: 20
 --- !u!1 &33473081
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,12 +409,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 113761338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a06902729afe446a28061739f9bb9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cc4d207ff4e24a4fb314425c2dd8fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 444754045683138360, guid: a3e17a85961122d4bb96bd91ae5d9cb9, type: 3}
   maxSpawnTime: 10
-  minSpawnTime: 24
+  minSpawnTime: 20
+  startSpawnChance: 80
 --- !u!1 &135345333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,12 +1142,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 470959206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a06902729afe446a28061739f9bb9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cc4d207ff4e24a4fb314425c2dd8fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 444754045683138360, guid: a3e17a85961122d4bb96bd91ae5d9cb9, type: 3}
-  maxSpawnTime: 6
-  minSpawnTime: 25
+  maxSpawnTime: 10
+  minSpawnTime: 20
+  startSpawnChance: 20
 --- !u!1 &503802745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,12 +1189,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 503802745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a06902729afe446a28061739f9bb9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cc4d207ff4e24a4fb314425c2dd8fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 444754045683138360, guid: a3e17a85961122d4bb96bd91ae5d9cb9, type: 3}
-  maxSpawnTime: 15
-  minSpawnTime: 25
+  maxSpawnTime: 10
+  minSpawnTime: 20
+  startSpawnChance: 40
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,12 +2708,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 995038360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a06902729afe446a28061739f9bb9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cc4d207ff4e24a4fb314425c2dd8fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 444754045683138360, guid: a3e17a85961122d4bb96bd91ae5d9cb9, type: 3}
-  maxSpawnTime: 7
-  minSpawnTime: 23
+  maxSpawnTime: 10
+  minSpawnTime: 20
+  startSpawnChance: 40
 --- !u!1 &1012456499
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,10 +3145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13e2acc54ae30e49b6adf4c73ff003c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectablePrefab: {fileID: 3173192235213777125, guid: fe1bae4202459e54c90388519b50cd11, type: 3}
-  spawnWarningParticle: {fileID: 2486444396930155825, guid: 6d451419a2e154349bb925b89dfafee1, type: 3}
+  spawnPrefab: {fileID: 3173192235213777125, guid: fe1bae4202459e54c90388519b50cd11, type: 3}
   maxSpawnTime: 8
   minSpawnTime: 7
+  spawnWarningParticle: {fileID: 2486444396930155825, guid: 6d451419a2e154349bb925b89dfafee1, type: 3}
   spawnPoints:
   - {fileID: 49591476}
   - {fileID: 808786222}
@@ -5245,7 +5250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_JumpForce: 600
-  m_MovementSmoothing: 0.2
+  m_MovementSmoothing: 0.1
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2

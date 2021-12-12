@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectable : MonoBehaviour {
+public class Collectable : SpawnableObject {
 
     [SerializeField]
     private float lifetime;
@@ -45,12 +45,33 @@ public class Collectable : MonoBehaviour {
         #endregion
     }
 
-    public void Initalize(Colour colour) {
+    public override void Initalize(object[] args) {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        Colour = colour;
+        if (TryGetColourFromArgs(out Colour argColour)) {
+            Colour = argColour;
+        } else {
+            Colour = new Colour(ColourEnum.BLUE);
+            Debug.LogError("Collectable.cs :: Initalize() :: Colour is not passed in as Arg.");
+        }
         SetColor();
 
+        #region Local_Function
+
+        bool TryGetColourFromArgs(out Colour colour) {
+            colour = null;
+
+            foreach (var arg in args) {
+                if (arg as Colour != null) {
+                    colour = arg as Colour;
+                    return true;
+                }
+            }
+
+            return colour != null;
+        }
+
+        #endregion
     }
 
     private void SetColor() {

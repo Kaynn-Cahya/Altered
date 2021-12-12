@@ -2,32 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour {
+/// <summary>
+/// Spawns on self by default, overridable functions
+/// </summary>
+public abstract class Spawner : MonoBehaviour {
 
     [SerializeField]
-    private SpawnableObject spawnPrefab;
+    protected SpawnableObject spawnPrefab;
 
     [SerializeField]
-    private float maxSpawnTime;
+    protected float maxSpawnTime;
     [SerializeField]
-    private float minSpawnTime;
+    protected float minSpawnTime;
 
-    private Timer timer;
+    protected Timer timer;
 
     private void Start() {
-        float threshold;
-        int startingSpawnOrNot = Random.Range(0, 100);
-        if (startingSpawnOrNot > 35) {
-            threshold = 3f;
-        } else {
-            threshold = Random.Range(minSpawnTime, maxSpawnTime);
-        }
-        
-        timer = new Timer(threshold, delegate {
-            Spawn(); ResetTimer();
-        });
+        if (!BeforeStart()) {
+            float threshold = Random.Range(minSpawnTime, maxSpawnTime);
+            timer = new Timer(threshold, delegate {
+                Spawn();
+                ResetTimer();
+            });
 
-        timer.Start();
+            timer.Start();
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>True to override this with the default Start()</returns>
+    protected virtual bool BeforeStart() {
+        return false;
     }
 
     private void Update() {
@@ -38,22 +45,22 @@ public class Spawner : MonoBehaviour {
         timer.Update(Time.deltaTime);
     }
 
-    private void ResetTimer() {
+    protected virtual void ResetTimer() {
         float threshold = Random.Range(minSpawnTime, maxSpawnTime);
         timer.Reset(threshold);
     }
 
-    private void Spawn() {
+    protected virtual void Spawn() {
         SpawnableObject spawnedObj = Instantiate(spawnPrefab);
         spawnedObj.transform.position = transform.position;
         spawnedObj.Initalize();
     }
 
-    public void AddTimerTicks(float ticks) {
+    public virtual void AddTimerTicks(float ticks) {
         timer.Update(ticks);
     }
 
-    public void ReduceMaxThreshold(float reduction) {
+    public virtual void ReduceMaxThreshold(float reduction) {
         if ((maxSpawnTime - reduction - 5f) >= minSpawnTime) {
             maxSpawnTime -= reduction;
         }

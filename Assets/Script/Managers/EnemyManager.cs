@@ -7,7 +7,7 @@ public class EnemyManager : Singleton<EnemyManager> {
     private HashSet<Enemy> existingEnemies;
 
     [SerializeField]
-    private Spawner[] enemySpawners;
+    private EnemySpawner[] enemySpawners;
 
     private void Start() {
         existingEnemies = new HashSet<Enemy>();
@@ -22,7 +22,6 @@ public class EnemyManager : Singleton<EnemyManager> {
 
         if (existingEnemies.Count == 0) {
             GameManager.Instance.TriggerClearScreen();
-
 
             foreach (var spawner in enemySpawners) {
                 spawner.AddTimerTicks(Random.Range(1f, 5f));

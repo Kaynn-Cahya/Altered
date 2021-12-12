@@ -39,7 +39,7 @@ public class Enemy : SpawnableObject {
         jumping = false;
     }
 
-    public override void Initalize() {
+    public override void Initalize(object[] args) {
         controller = GetComponent<CharacterController2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         jumping = false;
