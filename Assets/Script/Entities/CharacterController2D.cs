@@ -45,12 +45,14 @@ public class CharacterController2D : MonoBehaviour {
     }
 
 
-    public void Move(float move, bool jump) {
+    public void Move(float move, bool jump, bool forceLinearY = false) {
         //only control the player if grounded or airControl is turned on
         if (m_Grounded || m_AirControl) {
 
+            float ySpeed = forceLinearY ? 0f : m_Rigidbody2D.velocity.y;
+
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+            Vector3 targetVelocity = new Vector2(move * 10f, ySpeed);
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
         }

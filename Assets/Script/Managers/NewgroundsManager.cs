@@ -60,8 +60,8 @@ public class NewgroundsManager : Singleton<NewgroundsManager> {
 
         postScore pScore = new postScore {
             id = SCORE_BOARD_ID,
-            value = scoreValue
-            // TODO: Tag with version number
+            value = scoreValue,
+            tag = Application.version
         };
 
         pScore.callWith(newgroundCore, onScoreSent);
