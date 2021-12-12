@@ -63,7 +63,6 @@ public class GameManager : Singleton<GameManager> {
         void EnableInteraction() {
             gameOverUI.interactable = true;
             gameOverUI.blocksRaycasts = true;
-            gameOverFullyShown = true;
         }
         #endregion
     }
